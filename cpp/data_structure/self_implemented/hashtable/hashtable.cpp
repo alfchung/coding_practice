@@ -15,17 +15,46 @@
 
 using namespace std;
 
+const int default_table_size = 100;
+
+template <class Key, class Value>
+class record {
+	public:
+		Key key;
+		Value value;
+		record* next;
+};
+
+
 template <class Key, class Value>
 class hashtable {
 	public: 
-		hashtable();
-		hashtable(int size);
-		void put( pair<Key, Value> record);
+		hashtable()  {
+			table.resize(default_table_size); //default table size
+		}
+
+		hashtable(int size) {
+			table.resize(size); //default table size
+		}
+
+		void put(Key key, Value value) {
+
+		}
+
+
+
 		Value get( Key key );
 
+
+
+
+
 	private:
-		vector<  pair<Key, Value>  > table;
+		vector< record <Key, Value> > table;
+
 };
+
+
 
 
 
