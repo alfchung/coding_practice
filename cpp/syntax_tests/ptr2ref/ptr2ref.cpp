@@ -17,9 +17,12 @@ int main() {
 	int *pa = &a;
 	int &ra = a;
 	int *pra = &ra;
+	int *pra2 = &ra;
 	cout<<"pa="<<pa<<endl;
 	cout<<"pra="<<pra<<endl;
+	cout<<"pra2="<<pra2<<endl;
 	cout<<"pra==pa? "<<(pra==pa)<<endl;
+	cout<<"pra2==pa? "<<(pra==pa)<<endl;
 }
 
 
