@@ -22,6 +22,13 @@ class parent {
 			cout<<"hello from "<<name<<endl;
 		}
 
+		virtual void display() {
+			cout<<"this at "<<this<<endl;
+			cout<<"parent.name at "<<&name<<endl;
+			cout<<"parent.name offset "<<(int*)&name-(int*)this<<endl;
+			cout<<endl;
+		}
+
 	private:
 		string name;
 };
@@ -38,6 +45,25 @@ class child1:public parent {
 			cout<<"hello from "<<name<<endl;
 		}
 
+
+		void display() {
+
+			cout<<endl;
+			int *cp;
+			int i = 0;
+			for (cp = (int*)this; *cp!=0; cp++) {
+				cout<<i++<<" "<<(*cp)<<endl;
+			}
+			cout<<endl;
+
+
+			cout<<"this at "<<this<<endl;
+			cout<<"child.name at "<<&name<<endl;
+			cout<<"child.name offset "<<(int*)&name-(int*)this<<endl;
+			cout<<"child's "<<endl;
+			parent::display();
+		}
+
 	private:
 		string name; // this is override of the parent's name !!!
 };
@@ -52,6 +78,23 @@ void say_hello(parent foo) {
 
 void say_hello_ref(parent &foo) {
 	foo.hello();
+}
+
+
+ostream& operator<<(ostream &o, parent &c) {
+	cout<<"class address: "<<&c<<endl;
+	cout<<endl;
+
+	cout<<"virtual table:"<<endl;
+	unsigned *vptr = NULL;
+	int i=0;
+	for (vptr= (unsigned*)*((unsigned*)&c); *vptr!=0; vptr++) {
+		cout<<i++<<" "<<*vptr<<endl;
+	}
+
+	c.display();
+
+	cout<<endl;
 }
 
 
@@ -88,6 +131,17 @@ int main() {
 	pp = &c;
 	pp->hello();
 	cout<<endl;
+	cout<<endl;
+	cout<<endl;
+
+
+	cout<<"Class memory explore"<<endl;
+	cout<<"object c"<<endl;
+	cout<<c<<endl;
+	cout<<endl;
+
+	cout<<"sizeof(parent)="<<sizeof(parent)<<endl;
+	cout<<"sizeof(child1)="<<sizeof(child1)<<endl;
 
 
 	return 0;
