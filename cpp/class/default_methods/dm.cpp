@@ -20,7 +20,8 @@ class Apple {
 
 
 int main() {
-	Apple a0(); //default constructor
+	//Apple a0(); //default constructor, this doesn't work, no need ()
+		    //otherwise, can't call methods
 	Apple a1; //default constructor
 	Apple a2(a1); //copy constructor
 	Apple a3; //default constructor
